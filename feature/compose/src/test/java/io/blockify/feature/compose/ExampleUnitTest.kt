@@ -10,7 +10,7 @@
  * be found in the AUTHORS file in the root of the source tree.
  */
 
-package io.blockify.library.compose
+package io.blockify.feature.compose
 
 import org.junit.Test
 
