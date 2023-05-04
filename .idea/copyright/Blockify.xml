@@ -1,0 +1,6 @@
+<component name="CopyrightManager">
+  <copyright>
+    <option name="notice" value="Blockify - a messaging app with a focus on speed and security.&#10;https://github.com/King-M-A-KH-85/blockify-android&#10;Copyright (c) &amp;#36;originalComment.match(&quot;Copyright \(c\) (\d+)&quot;, 1, &quot;-&quot;, &quot;&amp;#36;today.year&quot;)&amp;#36;today.year. All Rights Reserved.&#10;&#10;Use of this source code is governed by a BSD-style license&#10;that can be found in the LICENSE file in the root of the source&#10;tree. An additional intellectual property rights grant can be found&#10;in the file PATENTS.  All contributing project authors may&#10;be found in the AUTHORS file in the root of the source tree." />
+    <option name="myName" value="Blockify" />
+  </copyright>
+</component>

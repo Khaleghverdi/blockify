@@ -1,3 +1,15 @@
+/*
+ * Blockify - a messaging app with a focus on speed and security.
+ * https://github.com/King-M-A-KH-85/blockify-android
+ * Copyright (c) 2023. All Rights Reserved.
+ *
+ * Use of this source code is governed by a BSD-style license
+ * that can be found in the LICENSE file in the root of the source
+ * tree. An additional intellectual property rights grant can be found
+ * in the file PATENTS.  All contributing project authors may
+ * be found in the AUTHORS file in the root of the source tree.
+ */
+
 /**
  * Created by Sergey Chuprin on 07.06.2019.
  */
@@ -31,6 +43,7 @@ object AppConfig {
     object BuildModes {
         const val FULL = "full"
         const val DEMO = "demo"
+        const val ADMIN = "admin"
         const val MIN_API24 = "minApi24"
         const val MIN_API23 = "minApi23"
         const val MIN_API21 = "minApi21"

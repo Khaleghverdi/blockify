@@ -1,3 +1,15 @@
+/*
+ * Blockify - a messaging app with a focus on speed and security.
+ * https://github.com/King-M-A-KH-85/blockify-android
+ * Copyright (c) 2023. All Rights Reserved.
+ *
+ * Use of this source code is governed by a BSD-style license
+ * that can be found in the LICENSE file in the root of the source
+ * tree. An additional intellectual property rights grant can be found
+ * in the file PATENTS.  All contributing project authors may
+ * be found in the AUTHORS file in the root of the source tree.
+ */
+
 plugins {
     id("com.android.library")
     kotlin("android")
@@ -50,7 +62,7 @@ android {
 }
 
 dependencies {
-    implementation(projects.libraryComponents)
+    implementation(projects.feature.components)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core.ktx)
 
@@ -59,7 +71,7 @@ dependencies {
     implementation(libs.compose.ui.tooling)
     implementation(libs.compose.foundation)
     implementation(libs.compose.material)
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
     implementation(platform("androidx.compose:compose-bom:2022.10.00"))
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")

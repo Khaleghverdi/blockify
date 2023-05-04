@@ -1,3 +1,15 @@
+/*
+ * Blockify - a messaging app with a focus on speed and security.
+ * https://github.com/King-M-A-KH-85/blockify-android
+ * Copyright (c) 2023. All Rights Reserved.
+ *
+ * Use of this source code is governed by a BSD-style license
+ * that can be found in the LICENSE file in the root of the source
+ * tree. An additional intellectual property rights grant can be found
+ * in the file PATENTS.  All contributing project authors may
+ * be found in the AUTHORS file in the root of the source tree.
+ */
+
 import java.util.Properties
 import java.io.FileInputStream
 
@@ -107,6 +119,14 @@ android {
             // not include a "free" flavor. Specify as many
             // fallbacks as you like; the plugin selects the first flavor
             // that's available in the dependency's "tier" dimension.
+            matchingFallbacks += listOf("demo", "trial")
+        }
+
+
+        create(AppConfig.BuildModes.ADMIN) {
+            // Assigns this product flavor to the "mode" flavor dimension.
+            dimension = "mode"
+            applicationIdSuffix = ".admin"
             matchingFallbacks += listOf("demo", "trial")
         }
 
