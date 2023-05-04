@@ -40,7 +40,7 @@ rootProject.name = "Blockify"
 include(
     ":bom",
     ":app",
+    ":feature:android:intro",
     ":feature:components",
-    ":feature:android",
     ":feature:compose"
 )

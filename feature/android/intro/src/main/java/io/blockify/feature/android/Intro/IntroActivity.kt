@@ -10,20 +10,16 @@
  * be found in the AUTHORS file in the root of the source tree.
  */
 
-package io.blockify.feature.android
+package io.blockify.feature.android.Intro
 
-import org.junit.Test
-
-import org.junit.Assert.*
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 
 /**
- * Example local unit test, which will execute on the development machine (host).
- *
- * See [testing documentation](http://d.android.com/tools/testing).
+ * Created by kingm on 4/26/2023
  */
-class ExampleUnitTest {
-    @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+class IntroActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
     }
 }
