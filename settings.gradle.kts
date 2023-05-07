@@ -31,16 +31,19 @@ dependencyResolutionManagement {
         mavenLocal()
         maven("https://repo.eclipse.org/content/groups/releases/")
         maven("https://maven.aliyun.com/nexus/content/groups/public/")
+        maven("https://jitpack.io")
     }
 }
 rootProject.name = "Blockify"
-
-
 
 include(
     ":bom",
     ":app",
     ":feature:android:intro",
     ":feature:components",
-    ":feature:compose"
+    ":feature:compose",
+    ":common",
+    ":android-stubs",
+    ":treeview",
+    ":java-stubs",
 )

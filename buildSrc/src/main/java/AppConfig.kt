@@ -32,6 +32,7 @@ object AppConfig {
     const val MIN_SDK = 21
     const val TARGET_SDK = 29
     const val COMPILE_SDK = 33
+    const val buildToolsVersion = "31.0.0"
 
     object BuildTypes {
         const val DEV = "dev"
@@ -41,14 +42,8 @@ object AppConfig {
     }
 
     object BuildModes {
-        const val FULL = "full"
-        const val DEMO = "demo"
+        const val USER = "user"
         const val ADMIN = "admin"
-        const val MIN_API24 = "minApi24"
-        const val MIN_API23 = "minApi23"
-        const val MIN_API21 = "minApi21"
     }
 
 }
-
-

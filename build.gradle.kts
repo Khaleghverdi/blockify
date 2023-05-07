@@ -10,8 +10,12 @@
  * be found in the AUTHORS file in the root of the source tree.
  */
 
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
+import java.io.File
+import java.nio.file.Files
+import java.nio.file.Path
+import java.nio.file.Paths
+import java.nio.file.StandardCopyOption
 
 @Suppress("DSL_SCOPE_VIOLATION") // https://youtrack.jetbrains.com/issue/KTIJ-19369
 plugins {
@@ -34,26 +38,6 @@ val detektFormatting = libs.detekt.formatting
 
 
 subprojects {
-    plugins.withId("com.android.application") {
-        configureBaseExtension()
-    }
-    plugins.withId("com.android.library") {
-        configureBaseExtension()
-    }
-
-//    plugins.withId("com.vanniktech.maven.publish.base") {
-//        configure<MavenPublishBaseExtension> {
-//            group = "io.github.Rosemoe.sora-editor"
-//            version = Versions.versionName
-//            pomFromGradleProperties()
-//            publishToMavenCentral(SonatypeHost.S01)
-//            signAllPublications()
-//            if ("bom" != this@subprojects.name) {
-//                configure(AndroidSingleVariantLibrary(publishJavadocJar = false))
-//            }
-//        }
-//    }
-
     apply {
         plugin("io.gitlab.arturbosch.detekt")
     }
@@ -67,24 +51,6 @@ subprojects {
     }
 
 }
-fun Project.configureBaseExtension() {
-//    extensions.findByType(BaseExtension::class)?.run {
-//        compileSdkVersion(Versions.compileSdkVersion)
-//        buildToolsVersion = Versions.buildToolsVersion
-//
-//        defaultConfig {
-//            minSdk = if (highApiProjects.contains(this@configureBaseExtension.name)) Versions.minSdkVersionHighApi else Versions.minSdkVersion
-//            targetSdk = Versions.targetSdkVersion
-//            versionCode = Versions.versionCode
-//            versionName = Versions.versionName
-//        }
-//
-//        compileOptions {
-//            sourceCompatibility = JavaVersion.VERSION_11
-//            targetCompatibility = JavaVersion.VERSION_11
-//        }
-//    }
-}
 
 buildscript {
     repositories {
@@ -94,19 +60,9 @@ buildscript {
     }
 
     dependencies {
-
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0")
+        classpath("com.google.gms:google-services:4.3.15")
     }
-}
-
-// This block encapsulates custom properties and makes them available to all
-// modules in the project. The following are only a few examples of the types
-// of properties you can define.
-ext {
-    extra["sdkVersion"] = 33
-    // You can also create properties to specify versions for dependencies.
-    // Having consistent versions between modules can avoid conflicts with behavior.
-    extra["appcompatVersion"] = "1.6.1"
 }
 
 tasks {
@@ -117,15 +73,45 @@ tasks {
     }
 }
 
-//tasks.register<Delete>("clean").configure {
-//    delete(rootProject.buildDir)
-//}
 
-val excludeProjectName = arrayOf("app", "buildSrc")
+tasks.register("deleteUnimportedJavaFiles") {
+    // TODO: this dont work
+    doLast {
+        val selectedFiles = mutableListOf<File>()
 
-tasks.register("bundleAll") {
-    group = "blockify"
-    allprojects
-        .filter { it.name !in excludeProjectName }
-        .forEach { dependsOn(it.getTasksByName("bundleReleaseAar", false)) }
+        // Select Java files
+        println("Select Java files:")
+        while (true) {
+            val input = readLine()?.trim()
+            if (input.isNullOrBlank()) {
+                break
+            }
+            val file = File(input)
+            if (file.isFile && file.extension.equals("java", ignoreCase = true)) {
+                selectedFiles.add(file)
+            }
+        }
+
+        // Get imported classes
+        val importedClasses = mutableSetOf<String>()
+        selectedFiles.forEach { file ->
+            file.readLines().forEach { line ->
+                if (line.trim().startsWith("import ")) {
+                    importedClasses.add(
+                        line.trim().substringAfter("import ").substringBeforeLast(";").trim()
+                    )
+                }
+            }
+        }
+
+        // Delete unimported Java files
+        selectedFiles.forEach { file ->
+            val className = file.nameWithoutExtension
+            if (!importedClasses.contains(className)) {
+                val path = file.toPath()
+                Files.delete(path)
+                println("Deleted ${path.toAbsolutePath()}")
+            }
+        }
+    }
 }

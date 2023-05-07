@@ -19,6 +19,8 @@ ktlint_gradle = "10.2.1"
 min_sdk_version = "21"
 target_sdk_version = "33"
 benmanesversion = "0.46.0"
+multidex = "2.0.1"
+material = "1.8.0"
 
 [libraries]
 junit = { module = "junit:junit", version.ref = "junit" }
@@ -42,6 +44,8 @@ agp = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 kgp = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 dokka_gradle_plugin = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka"}
 dokka_core = { module = "org.jetbrains.dokka:dokka-core", version.ref = "dokka"}
+material = { module = "com.google.android.material:material", version.ref = "material"}
+multidex = { module = "androidx.multidex:multidex", version.ref = "multidex"}
 
 [plugins]
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }

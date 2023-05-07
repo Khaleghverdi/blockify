@@ -8,11 +8,11 @@
  * tree. An additional intellectual property rights grant can be found
  * in the file PATENTS.  All contributing project authors may
  * be found in the AUTHORS file in the root of the source tree.
+ *
+ * The init script is used to run Spotless in a gradle configuration cache compliant manner as
+ * Spotless itself is not gradle configuration cache compliant.
+ * Note that the init script needs to be run with the configuration cache turned off.
  */
-
-// The init script is used to run Spotless in a gradle configuration cache compliant manner as
-// Spotless itself is not gradle configuration cache compliant.
-// Note that the init script needs to be run with the configuration cache turned off.
 
 val ktlintVersion = "0.44.0"
 

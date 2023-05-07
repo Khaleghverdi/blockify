@@ -10,17 +10,20 @@
  * be found in the AUTHORS file in the root of the source tree.
  */
 
-package io.blockify.app;
+package io.blockify.feature.android
 
-import android.content.Context;
+import org.junit.Test
 
-import androidx.multidex.MultiDex;
-import androidx.multidex.MultiDexApplication;
+import org.junit.Assert.*
 
-public class ApplicationLoader extends MultiDexApplication {
-    @Override
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(base);
-        MultiDex.install(this);
+/**
+ * Example local unit test, which will execute on the development machine (host).
+ *
+ * See [testing documentation](http://d.android.com/tools/testing).
+ */
+class ExampleUnitTest {
+    @Test
+    fun addition_isCorrect() {
+        assertEquals(4, 2 + 2)
     }
 }
