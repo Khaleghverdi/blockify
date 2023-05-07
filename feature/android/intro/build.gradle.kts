@@ -19,11 +19,11 @@ plugins {
 
 android {
     namespace = "io.blockify.feature.android.intro"
-    compileSdk = AppConfig.COMPILE_SDK
+    compileSdk = ModulesConfig.compileSdk
 
     defaultConfig {
-        minSdk = AppConfig.MIN_SDK
-        targetSdk = AppConfig.TARGET_SDK
+        minSdk = ModulesConfig.minSdk
+        targetSdk = ModulesConfig.targetSdk
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")

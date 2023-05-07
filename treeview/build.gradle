@@ -3,12 +3,12 @@ plugins {
 }
 
 android {
-    compileSdk AppConfig.COMPILE_SDK
-    namespace "io.blockify.treeview"
+    compileSdk ModulesConfig.compileSdk
+    namespace ModulesConfig.TreeViewNamespace
 
     defaultConfig {
-        minSdk = AppConfig.MIN_SDK
-        targetSdk = AppConfig.TARGET_SDK
+        minSdk = ModulesConfig.minSdk
+        targetSdk = ModulesConfig.targetSdk
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -20,17 +20,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility ModulesConfig.sourceCompatibility
+        targetCompatibility ModulesConfig.targetCompatibility
     }
 }
 
 dependencies {
-
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.8.0'
-    testImplementation 'junit:junit:'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    implementation libs.androidx.appcompat
+    implementation libs.material
+    implementation libs.junit
+    implementation libs.extJunit
+    implementation libs.espresso.core
 }

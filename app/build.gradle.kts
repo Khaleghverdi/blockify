@@ -13,7 +13,6 @@
 import org.gradle.internal.classpath.Instrumented.systemProperty
 import java.util.Properties
 import java.io.FileInputStream
-import java.net.URI
 
 plugins {
     id("com.android.application")
@@ -22,14 +21,14 @@ plugins {
 
 android {
     namespace = "io.blockify.app"
-    compileSdk = AppConfig.COMPILE_SDK
+    compileSdk = ModulesConfig.compileSdk
 
     defaultConfig {
-        applicationId = AppConfig.AppCoordinates.APP_ID
-        minSdk = AppConfig.MIN_SDK
-        targetSdk = AppConfig.TARGET_SDK
-        versionCode = AppConfig.AppCoordinates.VERSION_CODE
-        versionName = AppConfig.AppCoordinates.VERSION_NAME
+        applicationId = ModulesConfig.AppModule.appId
+        minSdk = ModulesConfig.minSdk
+        targetSdk = ModulesConfig.targetSdk
+        versionCode = ModulesConfig.AppModule.versionCode
+        versionName = ModulesConfig.AppModule.versionName
         multiDexEnabled = true
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -54,7 +53,7 @@ android {
     }
 
     buildTypes {
-        getByName(AppConfig.BuildTypes.RELEASE) {
+        getByName(ModulesConfig.BuildTypes.release) {
             manifestPlaceholders["hostName"] = "king-m-a-kh.ir"
             signingConfig = signingConfigs.getByName("general")
             isMinifyEnabled = true
@@ -69,7 +68,7 @@ android {
             multiDexKeepProguard = file("multidex-config.pro")
         }
 
-        getByName(AppConfig.BuildTypes.DEBUG) {
+        getByName(ModulesConfig.BuildTypes.debug) {
             manifestPlaceholders["hostName"] = "king-m-a-kh.ir"
             applicationIdSuffix = ".debug"
             signingConfig = signingConfigs.getByName("general")
@@ -77,18 +76,29 @@ android {
         }
     }
 
-    flavorDimensions("environment")
+    flavorDimensions("environment", "store")
 
     productFlavors {
 
-        create(AppConfig.BuildModes.USER) {
+        create(ModulesConfig.BuildModes.user) {
             dimension = "environment"
             buildConfigField("String", "VAR", "\"this is string from user build script\"")
+
+            create(ModulesConfig.BuildModes.googlePlay) {
+                dimension = "store"
+            }
+
+            create(ModulesConfig.BuildModes.fdroid) {
+                dimension = "store"
+            }
+
+            create(ModulesConfig.BuildModes.myket) {
+                dimension = "store"
+            }
         }
 
-        create(AppConfig.BuildModes.ADMIN) {
+        create(ModulesConfig.BuildModes.admin) {
             dimension = "environment"
-            applicationIdSuffix = ".admin"
             buildConfigField("String", "VAR", "\"this one is from admin build script\"")
         }
     }
@@ -117,9 +127,9 @@ android {
     }
 
     compileOptions {
+        sourceCompatibility = ModulesConfig.sourceCompatibility
+        targetCompatibility = ModulesConfig.targetCompatibility
 //        isCoreLibraryDesugaringEnabled = true
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
     }
 
 
@@ -131,7 +141,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
+        jvmTarget = ModulesConfig.jvmTarget
     }
 
     dependenciesInfo {
@@ -164,15 +174,15 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.material)
 
+    // more libs
+    implementation(libs.about)
+    implementation(libs.crashx)
+    implementation(libs.kotlin.stdlib)
+
     // test implementation
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.androidx.test.ext.junit.ktx)
     androidTestImplementation(libs.androidx.test.rules)
     androidTestImplementation(libs.espresso.core)
-
-    // about
-    implementation("com.github.daniel-stoneuk:material-about-library:3.1.2")
-    implementation("com.github.TutorialsAndroid:crashx:v6.0.19")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.8.20")
 }

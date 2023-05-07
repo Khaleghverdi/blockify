@@ -17,11 +17,11 @@ plugins {
 
 android {
     namespace = "io.blockify.feature.compose"
-    compileSdk = AppConfig.COMPILE_SDK
+    compileSdk = ModulesConfig.compileSdk
 
     defaultConfig {
-        minSdk = AppConfig.MIN_SDK
-        targetSdk = AppConfig.TARGET_SDK
+        minSdk = ModulesConfig.minSdk
+        targetSdk = ModulesConfig.targetSdk
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -32,11 +32,11 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = ModulesConfig.sourceCompatibility
+        targetCompatibility = ModulesConfig.targetCompatibility
     }
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
+        jvmTarget = ModulesConfig.jvmTarget
     }
 
     buildFeatures {

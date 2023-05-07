@@ -10,18 +10,11 @@
  * be found in the AUTHORS file in the root of the source tree.
  */
 
-//enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
-
 dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
     }
-//    versionCatalogs {
-//        create("libs") {
-//            from(files("../gradle/libs.versions.toml"))
-//        }
-//    }
 }
 
 include(":convention")

@@ -37,7 +37,6 @@ dependencyResolutionManagement {
 rootProject.name = "Blockify"
 
 include(
-    ":bom",
     ":app",
     ":feature:android:intro",
     ":feature:components",

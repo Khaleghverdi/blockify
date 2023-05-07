@@ -13,9 +13,6 @@
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 import java.io.File
 import java.nio.file.Files
-import java.nio.file.Path
-import java.nio.file.Paths
-import java.nio.file.StandardCopyOption
 
 @Suppress("DSL_SCOPE_VIOLATION") // https://youtrack.jetbrains.com/issue/KTIJ-19369
 plugins {
@@ -31,7 +28,7 @@ plugins {
 }
 
 allprojects {
-    group = PUBLISHING_GROUP
+    group = publishingGroup
 }
 
 val detektFormatting = libs.detekt.formatting

@@ -21,9 +21,18 @@ target_sdk_version = "33"
 benmanesversion = "0.46.0"
 multidex = "2.0.1"
 material = "1.8.0"
+kotlin-stdlib = "1.8.20"
+crashx = "v6.0.19"
+about = "3.1.2"
+annotation = "1.6.0"
+guava = "30.1.1-jre"
+gson = "2.9.0"
+commons-io = "2.11.0"
+zip4j = "2.9.1"
 
 [libraries]
 junit = { module = "junit:junit", version.ref = "junit" }
+extJunit = { module = "androidx.test.ext:junit", version = "1.1.5" }
 androidx_activity_compose = { module = "androidx.activity:activity-compose", version.ref = "androidx_activity_compose" }
 androidx_appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 androidx_constraint_layout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraint.layout" }
@@ -46,6 +55,14 @@ dokka_gradle_plugin = { module = "org.jetbrains.dokka:dokka-gradle-plugin", vers
 dokka_core = { module = "org.jetbrains.dokka:dokka-core", version.ref = "dokka"}
 material = { module = "com.google.android.material:material", version.ref = "material"}
 multidex = { module = "androidx.multidex:multidex", version.ref = "multidex"}
+kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin.stdlib"}
+crashx = { module = "com.github.TutorialsAndroid:crashx", version.ref = "crashx"}
+about = { module = "com.github.daniel-stoneuk:material-about-library", version.ref = "about"}
+annotation = { module = "androidx.annotation:annotation", version.ref = "annotation"}
+guava = { module = "com.google.guava:guava", version.ref = "guava"}
+gson = { module = "com.google.code.gson:gson", version.ref = "gson"}
+commons-io = { module = "commons-io:commons-io", version.ref = "commons.io"}
+zip4j = { module = "net.lingala.zip4j:zip4j", version.ref = "zip4j"}
 
 [plugins]
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }

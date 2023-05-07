@@ -17,15 +17,15 @@ plugins {
     publish
 }
 
-version = AppConfig.AppCoordinates.VERSION_CODE
+version = ModulesConfig.AppModule.versionCode
 
 dependencies {
     testImplementation(libs.junit)
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = ModulesConfig.sourceCompatibility
+    targetCompatibility = ModulesConfig.targetCompatibility
     withSourcesJar()
     withJavadocJar()
 }
