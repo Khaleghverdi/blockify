@@ -13,11 +13,7 @@
 plugins {
     id("java-library")
     kotlin("jvm")
-    id("maven-publish")
-    publish
 }
-
-version = ModulesConfig.AppModule.versionCode
 
 dependencies {
     testImplementation(libs.junit)

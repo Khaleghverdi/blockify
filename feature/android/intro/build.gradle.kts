@@ -13,26 +13,16 @@
 plugins {
     id("com.android.library")
     kotlin("android")
-    id("maven-publish")
-    publish
 }
 
 android {
     namespace = "io.blockify.feature.android.intro"
-    compileSdk = ModulesConfig.compileSdk
 
     defaultConfig {
-        minSdk = ModulesConfig.minSdk
-        targetSdk = ModulesConfig.targetSdk
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_17.toString()
     }

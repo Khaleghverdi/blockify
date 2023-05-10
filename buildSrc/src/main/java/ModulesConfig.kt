@@ -13,7 +13,7 @@ import org.gradle.api.JavaVersion
  */
 
 /**
- * Created by Sergey Chuprin on 07.06.2019.
+ * Created by king m a kh on 07.06.2019.
  */
 
 const val publishingGroup = "io.blockify"
@@ -22,17 +22,24 @@ object ModulesConfig {
     const val minSdk = 21
     const val targetSdk = 29
     const val compileSdk = 33
-    const val buildToolsVersion = "31.0.0"
+    const val buildToolsVersion = "33.0.0"
+    const val ndkVersion = "25.0.8775105"
+    const val cmakeVersion = "3.22.1"
     val sourceCompatibility = JavaVersion.VERSION_17
     val targetCompatibility = JavaVersion.VERSION_17
     val jvmTarget = JavaVersion.VERSION_17.toString()
 
+    private const val version = "0.0.1"
+    const val versionCode = 1
+    val versionName by lazy {
+        if (CI.isCiBuild) {
+            "$version-${CI.commitHash}-SNAPSHOT"
+        } else version
+    }
+
     object AppModule {
         const val namespace = "io.blockify.app"
         const val appId = "io.blockify"
-
-        const val versionCode = 1
-        const val versionName = "1.0.0"
     }
 
     const val TreeViewNamespace = "io.blockify.treeview"

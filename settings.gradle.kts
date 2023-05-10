@@ -11,7 +11,6 @@
  */
 
 @file:Suppress("UnstableApiUsage")
-
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
@@ -41,8 +40,7 @@ include(
     ":feature:android:intro",
     ":feature:components",
     ":feature:compose",
-    ":common",
     ":android-stubs",
+    ":common",
     ":treeview",
-    ":java-stubs",
 )

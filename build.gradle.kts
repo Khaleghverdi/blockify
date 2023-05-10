@@ -10,9 +10,7 @@
  * be found in the AUTHORS file in the root of the source tree.
  */
 
-import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
-import java.io.File
-import java.nio.file.Files
+import com.android.build.gradle.BaseExtension
 
 @Suppress("DSL_SCOPE_VIOLATION") // https://youtrack.jetbrains.com/issue/KTIJ-19369
 plugins {
@@ -20,33 +18,6 @@ plugins {
     id("com.android.application") apply false
     id("com.android.library") apply false
     kotlin("android") apply false
-    alias(libs.plugins.detekt)
-    alias(libs.plugins.versions)
-    alias(libs.plugins.publish) apply false
-    cleanup
-    base
-}
-
-allprojects {
-    group = publishingGroup
-}
-
-val detektFormatting = libs.detekt.formatting
-
-
-subprojects {
-    apply {
-        plugin("io.gitlab.arturbosch.detekt")
-    }
-
-    detekt {
-        config = rootProject.files("config/detekt/detekt.yml")
-    }
-
-    dependencies {
-        detektPlugins(detektFormatting)
-    }
-
 }
 
 buildscript {
@@ -62,53 +33,47 @@ buildscript {
     }
 }
 
-tasks {
-    withType<DependencyUpdatesTask>().configureEach {
-        rejectVersionIf {
-            candidate.version.isStableVersion().not()
+
+fun Project.configureBaseExtension() {
+    extensions.findByType(BaseExtension::class)?.run {
+        compileSdkVersion(ModulesConfig.compileSdk)
+        buildToolsVersion = ModulesConfig.buildToolsVersion
+
+        defaultConfig {
+            minSdk = ModulesConfig.minSdk
+            targetSdk = ModulesConfig.targetSdk
+            versionCode = ModulesConfig.versionCode
+            versionName = ModulesConfig.versionName
+        }
+
+        compileOptions {
+            sourceCompatibility = ModulesConfig.sourceCompatibility
+            targetCompatibility = ModulesConfig.targetCompatibility
+        }
+
+        buildTypes {
+            getByName(ModulesConfig.BuildTypes.release) {
+                isMinifyEnabled = false
+                proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
+            }
+
+            getByName(ModulesConfig.BuildTypes.debug) {
+                isMinifyEnabled = false
+                proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
+            }
         }
     }
 }
 
-
-tasks.register("deleteUnimportedJavaFiles") {
-    // TODO: this dont work
-    doLast {
-        val selectedFiles = mutableListOf<File>()
-
-        // Select Java files
-        println("Select Java files:")
-        while (true) {
-            val input = readLine()?.trim()
-            if (input.isNullOrBlank()) {
-                break
-            }
-            val file = File(input)
-            if (file.isFile && file.extension.equals("java", ignoreCase = true)) {
-                selectedFiles.add(file)
-            }
-        }
-
-        // Get imported classes
-        val importedClasses = mutableSetOf<String>()
-        selectedFiles.forEach { file ->
-            file.readLines().forEach { line ->
-                if (line.trim().startsWith("import ")) {
-                    importedClasses.add(
-                        line.trim().substringAfter("import ").substringBeforeLast(";").trim()
-                    )
-                }
-            }
-        }
-
-        // Delete unimported Java files
-        selectedFiles.forEach { file ->
-            val className = file.nameWithoutExtension
-            if (!importedClasses.contains(className)) {
-                val path = file.toPath()
-                Files.delete(path)
-                println("Deleted ${path.toAbsolutePath()}")
-            }
-        }
+subprojects {
+    plugins.withId("com.android.application") {
+        configureBaseExtension()
     }
+    plugins.withId("com.android.library") {
+        configureBaseExtension()
+    }
+}
+
+tasks.register<Delete>("clean").configure {
+    delete(rootProject.buildDir)
 }

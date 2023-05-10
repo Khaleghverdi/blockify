@@ -63,6 +63,7 @@ guava = { module = "com.google.guava:guava", version.ref = "guava"}
 gson = { module = "com.google.code.gson:gson", version.ref = "gson"}
 commons-io = { module = "commons-io:commons-io", version.ref = "commons.io"}
 zip4j = { module = "net.lingala.zip4j:zip4j", version.ref = "zip4j"}
+desugar = { module = "com.android.tools:desugar_jdk_libs", version = "2.0.3" }
 
 [plugins]
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }

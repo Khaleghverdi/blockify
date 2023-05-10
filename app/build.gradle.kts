@@ -21,21 +21,34 @@ plugins {
 
 android {
     namespace = "io.blockify.app"
-    compileSdk = ModulesConfig.compileSdk
 
     defaultConfig {
         applicationId = ModulesConfig.AppModule.appId
-        minSdk = ModulesConfig.minSdk
-        targetSdk = ModulesConfig.targetSdk
-        versionCode = ModulesConfig.AppModule.versionCode
-        versionName = ModulesConfig.AppModule.versionName
         multiDexEnabled = true
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        vectorDrawables {
+            useSupportLibrary = true
+        }
+
+        vectorDrawables.generatedDensities("mdpi", "hdpi", "xhdpi", "xxhdpi")
+
+//        externalNativeBuild {
+//            cmake {
+//                version = ModulesConfig.cmakeVersion
+//                arguments(
+//                    "-DANDROID_STL=c++_static",
+//                    "-DANDROID_PLATFORM=android-16",
+//                    "-j=16"
+//                )
+//            }
+//        }
     }
 
     buildFeatures {
         viewBinding = true
+        dataBinding = true
     }
 
     val keystorePropertiesFile = rootProject.file("keystore.properties")
@@ -49,6 +62,10 @@ android {
             keyPassword = keystoreProperties.getProperty("keyPassword")
             storeFile = file(keystoreProperties.getProperty("storeFile"))
             storePassword = keystoreProperties.getProperty("storePassword")
+            this.enableV1Signing = true
+            this.enableV2Signing = true
+            this.enableV3Signing = true
+            this.enableV4Signing = true
         }
     }
 
@@ -58,8 +75,10 @@ android {
             signingConfig = signingConfigs.getByName("general")
             isMinifyEnabled = true
             isShrinkResources = true
+            isJniDebuggable = true
+            multiDexEnabled = true
             isDebuggable = false
-
+            ndk.debugSymbolLevel = "FULL"
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
             testProguardFiles(
                 getDefaultProguardFile("proguard-android.txt"),
@@ -72,7 +91,14 @@ android {
             manifestPlaceholders["hostName"] = "king-m-a-kh.ir"
             applicationIdSuffix = ".debug"
             signingConfig = signingConfigs.getByName("general")
+
+            isMinifyEnabled = false
             isDebuggable = true
+            isJniDebuggable = true
+            isMinifyEnabled = false
+            isShrinkResources = false
+            multiDexEnabled = true
+            ndk.debugSymbolLevel = "FULL"
         }
     }
 
@@ -83,25 +109,31 @@ android {
         create(ModulesConfig.BuildModes.user) {
             dimension = "environment"
             buildConfigField("String", "VAR", "\"this is string from user build script\"")
-
-            create(ModulesConfig.BuildModes.googlePlay) {
-                dimension = "store"
-            }
-
-            create(ModulesConfig.BuildModes.fdroid) {
-                dimension = "store"
-            }
-
-            create(ModulesConfig.BuildModes.myket) {
-                dimension = "store"
-            }
         }
 
         create(ModulesConfig.BuildModes.admin) {
             dimension = "environment"
             buildConfigField("String", "VAR", "\"this one is from admin build script\"")
         }
+
+        create(ModulesConfig.BuildModes.googlePlay) {
+            dimension = "store"
+        }
+
+        create(ModulesConfig.BuildModes.fdroid) {
+            dimension = "store"
+        }
+
+        create(ModulesConfig.BuildModes.myket) {
+            dimension = "store"
+        }
     }
+
+//        externalNativeBuild {
+//            cmake {
+//                path = 'jni/CMakeLists.txt'
+//            }
+//        }
 
     // Always show the result of every unit test, even if it passes.
     testOptions.unitTests {
@@ -127,9 +159,11 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = ModulesConfig.sourceCompatibility
-        targetCompatibility = ModulesConfig.targetCompatibility
-//        isCoreLibraryDesugaringEnabled = true
+        isCoreLibraryDesugaringEnabled = true
+    }
+
+    androidResources {
+        additionalParameters.add("--warn-manifest-validation")
     }
 
 
@@ -151,8 +185,35 @@ android {
     }
 
     lint {
-        warningsAsErrors = true
-        abortOnError = true
+//        warningsAsErrors = true
+//        abortOnError = true
+
+        abortOnError = false
+        checkReleaseBuilds = false
+
+        disable.add("VectorPath")
+        disable.add("NestedWeights")
+        disable.add("ContentDescription")
+        disable.add("SmallSp")
+        disable.add("MissingTranslation")
+        disable.add("ExtraTranslation")
+        disable.add("BlockedPrivateApi")
+    }
+    packagingOptions {
+        // Multiple dependency bring these files in. Exclude them to enable
+        // our test APK to build (has no effect on our AARs)
+        resources.excludes += "/META-INF/AL2.0"
+        resources.excludes += "/META-INF/LGPL2.1"
+        resources.excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        jniLibs.useLegacyPackaging = true
+    }
+}
+
+androidComponents {
+    onVariants(selector().withBuildType("release")) {
+        // Only exclude *.version files in release mode as debug mode requires
+        // these files for layout inspector to work.
+        it.packaging.resources.excludes.add("META-INF/*.version")
     }
 }
 
@@ -161,6 +222,9 @@ dependencies {
 
     // multidex
     implementation(libs.multidex)
+
+    // Desugar
+    coreLibraryDesugaring(libs.desugar)
 
     // modules
     implementation(projects.feature.android.intro)

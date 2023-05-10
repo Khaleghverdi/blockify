@@ -1,8 +1,0 @@
-plugins {
-    id 'java-library'
-}
-
-java {
-    sourceCompatibility = ModulesConfig.sourceCompatibility
-    targetCompatibility = ModulesConfig.targetCompatibility
-}

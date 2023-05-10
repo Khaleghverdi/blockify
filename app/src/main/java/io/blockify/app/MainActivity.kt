@@ -12,10 +12,8 @@
 
 package io.blockify.app
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import io.blockify.feature.android.Intro.IntroActivity
 
 /**
  * Created by kingm on 4/26/2023
@@ -23,6 +21,5 @@ import io.blockify.feature.android.Intro.IntroActivity
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        startActivity(Intent(this@MainActivity,IntroActivity::class.java))
     }
 }
