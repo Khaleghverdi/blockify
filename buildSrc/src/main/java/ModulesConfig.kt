@@ -44,7 +44,6 @@ object ModulesConfig {
 
     const val TreeViewNamespace = "io.blockify.treeview"
 
-
     object BuildTypes {
         const val dev = "dev"
         const val debug = "debug"

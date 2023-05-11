@@ -10,7 +10,11 @@
  * be found in the AUTHORS file in the root of the source tree.
  */
 
-package io.blockify.feature.components
-
-class Utils {
+plugins {
+    id("com.android.library")
 }
+
+android.namespace = "io.blockify.data.chats"
+
+android.compileOptions.sourceCompatibility = ModulesConfig.sourceCompatibility
+android.compileOptions.targetCompatibility = ModulesConfig.targetCompatibility

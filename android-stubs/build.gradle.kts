@@ -1,11 +1,11 @@
 plugins {
-    id 'java-library'
+    id("java-library")
 }
 
 dependencies {
-    compileOnlyApi files('libs/android.jar')
+    compileOnlyApi(files("libs/android.jar"))
 
-    compileOnly 'androidx.annotation:annotation:1.6.0'
+    compileOnly("androidx.annotation:annotation:1.6.0")
 }
 
 java {

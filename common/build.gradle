@@ -1,17 +1,17 @@
 plugins {
-    id 'java-library'
+    id("java-library")
 }
 
 dependencies {
     // dependencies
-    api libs.zip4j
+    api(libs.zip4j)
 
     // android stubs for don't use androids dependencies
-    compileOnly projects.androidStubs
+    compileOnly(projects.androidStubs)
 
     // test dependencies
-    implementation libs.annotation
-    testImplementation libs.junit
+    implementation(libs.annotation)
+    testImplementation(libs.junit)
 }
 
 java {

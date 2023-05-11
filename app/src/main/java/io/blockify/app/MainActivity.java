@@ -21,8 +21,12 @@ import androidx.appcompat.app.AppCompatActivity;
  * Edited by kingm on 5/11/2023
  */
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+//        Timer timer = Time.startTimer();
         super.onCreate(savedInstanceState);
+//        System.out.println("onCreate took " + timer.getElapsed());
     }
 }

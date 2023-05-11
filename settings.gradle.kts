@@ -33,12 +33,30 @@ dependencyResolutionManagement {
         maven("https://jitpack.io")
     }
 }
+
 rootProject.name = "Blockify"
 
 include(
     ":app",
-    "components",
+
+    // stubs modules
     ":android-stubs",
+
+    // components module
+    "components",
+
+    // common module
     ":common",
+
+    // core modules
+    ":core:network",
+
+    // data modules
+    ":data:chats",
+
+    // feature modules
+    ":feature:chat",
+
+    // libraries
     ":treeview",
 )
