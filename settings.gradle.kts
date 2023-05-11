@@ -37,9 +37,7 @@ rootProject.name = "Blockify"
 
 include(
     ":app",
-    ":feature:android:intro",
-    ":feature:components",
-    ":feature:compose",
+    "components",
     ":android-stubs",
     ":common",
     ":treeview",

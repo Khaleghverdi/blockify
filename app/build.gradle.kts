@@ -188,8 +188,8 @@ android {
 //        warningsAsErrors = true
 //        abortOnError = true
 
-        abortOnError = false
-        checkReleaseBuilds = false
+//        abortOnError = false
+//        checkReleaseBuilds = false
 
         disable.add("VectorPath")
         disable.add("NestedWeights")
@@ -199,14 +199,14 @@ android {
         disable.add("ExtraTranslation")
         disable.add("BlockedPrivateApi")
     }
-    packagingOptions {
-        // Multiple dependency bring these files in. Exclude them to enable
-        // our test APK to build (has no effect on our AARs)
-        resources.excludes += "/META-INF/AL2.0"
-        resources.excludes += "/META-INF/LGPL2.1"
-        resources.excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        jniLibs.useLegacyPackaging = true
-    }
+//    packagingOptions {
+//        // Multiple dependency bring these files in. Exclude them to enable
+//        // our test APK to build (has no effect on our AARs)
+//        resources.excludes += "/META-INF/AL2.0"
+//        resources.excludes += "/META-INF/LGPL2.1"
+//        resources.excludes += "/META-INF/{AL2.0,LGPL2.1}"
+//        jniLibs.useLegacyPackaging = true
+//    }
 }
 
 androidComponents {
@@ -214,6 +214,13 @@ androidComponents {
         // Only exclude *.version files in release mode as debug mode requires
         // these files for layout inspector to work.
         it.packaging.resources.excludes.add("META-INF/*.version")
+
+        // Multiple dependency bring these files in. Exclude them to enable
+        // our test APK to build (has no effect on our AARs)
+        it.packaging.resources.excludes.add("/META-INF/AL2.0")
+        it.packaging.resources.excludes.add("/META-INF/LGPL2.1")
+        it.packaging.resources.excludes.add("/META-INF/{AL2.0,LGPL2.1}")
+//        it.packaging.jniLibs.useLegacyPackaging = true
     }
 }
 
@@ -227,21 +234,18 @@ dependencies {
     coreLibraryDesugaring(libs.desugar)
 
     // modules
-    implementation(projects.feature.android.intro)
     implementation(projects.common)
-    implementation(projects.feature.compose)
-    implementation(projects.feature.components)
+    implementation(projects.components)
 
     // androidx
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraint.layout)
-    implementation(libs.androidx.core.ktx)
     implementation(libs.material)
+    implementation(libs.palette)
 
-    // more libs
+    // other libs
     implementation(libs.about)
     implementation(libs.crashx)
-    implementation(libs.kotlin.stdlib)
 
     // test implementation
     testImplementation(libs.junit)

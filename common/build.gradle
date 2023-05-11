@@ -3,14 +3,15 @@ plugins {
 }
 
 dependencies {
-    implementation libs.annotation
-    testImplementation libs.junit
+    // dependencies
+    api libs.zip4j
+
+    // android stubs for don't use androids dependencies
     compileOnly projects.androidStubs
 
-    api libs.guava
-    api libs.gson
-    api libs.commons.io
-    api libs.zip4j
+    // test dependencies
+    implementation libs.annotation
+    testImplementation libs.junit
 }
 
 java {

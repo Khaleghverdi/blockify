@@ -29,7 +29,7 @@ buildscript {
 
     dependencies {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0")
-        classpath("com.google.gms:google-services:4.3.15")
+        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.5.3")
     }
 }
 
@@ -69,6 +69,7 @@ subprojects {
     plugins.withId("com.android.application") {
         configureBaseExtension()
     }
+
     plugins.withId("com.android.library") {
         configureBaseExtension()
     }
