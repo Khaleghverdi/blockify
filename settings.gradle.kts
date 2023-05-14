@@ -47,16 +47,21 @@ include(
 
     // common module
     ":common",
-
-    // core modules
-    ":core:network",
-
-    // data modules
-    ":data:chats",
-
-    // feature modules
-    ":feature:chat",
-
-    // libraries
-    ":treeview",
 )
+
+includeSubdomains("core", "data", "feature", "libraries")
+
+fun includeSubdomains(vararg names: String) {
+    names.forEach {
+        include(":$it")
+        project(":$it").projectDir.listFiles()?.forEach { dir ->
+//    if (dir.isDirectory && dir.name.startsWith("spring-integration-")) {
+            if (dir.isDirectory && (File(dir.absolutePath + "/build.gradle.kts").exists() ||
+                        File(dir.absolutePath + "/build.gradle").exists()
+                        )
+            ) {
+                include(":$it:${dir.name}")
+            }
+        }
+    }
+}

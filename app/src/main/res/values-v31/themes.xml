@@ -1,0 +1,56 @@
+<!--
+  ~ Blockify - a messaging app with a focus on speed and security.
+  ~ https://github.com/King-M-A-KH-85/blockify-android
+  ~ Copyright (c) 2023. All Rights Reserved.
+  ~
+  ~ Use of this source code is governed by a BSD-style license
+  ~ that can be found in the LICENSE file in the root of the source
+  ~ tree. An additional intellectual property rights grant can be found
+  ~ in the file PATENTS.  All contributing project authors may
+  ~ be found in the AUTHORS file in the root of the source tree.
+  -->
+
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Blockify" parent="ThemeOverlay.Material3.DynamicColors.DayNight">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/purple_200</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_200</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Theme.Blockify.Start" parent="@android:style/Theme.Material">
+        <item name="android:actionBarStyle">@style/ActionBar.Transparent.Blockify.Start</item>
+        <item name="android:colorBackground">@android:color/white</item>
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:colorPrimaryDark">#426482</item>
+        <item name="android:colorPrimary">#527da3</item>
+        <item name="android:navigationBarColor">#000000</item>
+        <item name="android:textViewStyle">@style/MyTextViewStyle</item>
+        <item name="android:forceDarkAllowed">false</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/tg_splash_320</item>
+        <item name="android:windowSplashScreenAnimationDuration">@integer/splash_screen_duration</item>
+        <item name="android:windowSplashScreenBackground">?android:windowBackground</item>
+    </style>
+
+    <!-- APP WIDGET -->
+
+    <style name="Base.Theme.Blockify.AppWidget" parent="android:Theme.DeviceDefault.DayNight" />
+
+    <style name="Blockify.AppWidget.Background" parent="Base.Blockify.AppWidget.Background">
+        <item name="android:clipToOutline">true</item>
+        <item name="android:background">@drawable/widget_background</item>
+    </style>
+
+    <style name="Blockify.AppWidget.Badge" parent="Base.Blockify.AppWidget.Badge">
+        <item name="android:textColor">?android:attr/textColorPrimaryInverse</item>
+    </style>
+</resources>

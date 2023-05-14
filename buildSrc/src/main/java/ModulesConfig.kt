@@ -42,7 +42,7 @@ object ModulesConfig {
         const val appId = "io.blockify"
     }
 
-    const val TreeViewNamespace = "io.blockify.treeview"
+    const val TreeViewNamespace = "io.blockify.libraries.treeview"
 
     object BuildTypes {
         const val dev = "dev"
@@ -57,5 +57,6 @@ object ModulesConfig {
         const val googlePlay = "googlePlay"
         const val fdroid = "fdroid"
         const val myket = "myket"
+        const val bazaar = "bazaar"
     }
 }

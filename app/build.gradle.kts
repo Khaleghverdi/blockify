@@ -20,7 +20,7 @@ plugins {
 }
 
 android {
-    namespace = "io.blockify.app"
+    namespace = ModulesConfig.AppModule.namespace
 
     defaultConfig {
         applicationId = ModulesConfig.AppModule.appId
@@ -126,6 +126,26 @@ android {
 
         create(ModulesConfig.BuildModes.myket) {
             dimension = "store"
+            val marketApplicationId = "io.blockify"
+            val marketBindAddress = "ir.mservices.market.InAppBillingService.BIND"
+            val manifestPlaceholders = mapOf(
+                "marketApplicationId" to marketApplicationId,
+                "marketBindAddress" to marketBindAddress,
+                "marketPermission" to "${marketApplicationId}.BILLING"
+            )
+            buildConfigField("String", "IAB_PUBLIC_KEY", "\"{MYKET_PUBLIC_KEY}\"")
+        }
+
+        create(ModulesConfig.BuildModes.bazaar) {
+            dimension = "store"
+            val marketApplicationId = "io.blockify"
+            val marketBindAddress = "ir.cafebazaar.pardakht.InAppBillingService.BIND"
+            val manifestPlaceholders = mapOf(
+                "marketApplicationId" to marketApplicationId,
+                "marketBindAddress" to marketBindAddress,
+                "marketPermission" to "io.blockify.permission.PAY_THROUGH_BAZAAR"
+            )
+            buildConfigField("String", "IAB_PUBLIC_KEY", "\\\"{BAZAAR_PUBLIC_KEY}\\\"")
         }
     }
 
@@ -243,9 +263,35 @@ dependencies {
     implementation(libs.material)
     implementation(libs.palette)
 
+    implementation(libs.androidx.core)
+    implementation(libs.core.splashscreen)
+    implementation(libs.core.google.shortcuts)
+    implementation(libs.annotation)
+    implementation(libs.palette)
+
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.ui)
+    implementation(libs.navigation.dynamic.features.fragment)
+    implementation(libs.navigation.testing)
+
+    implementation(libs.lifecycle.viewmodel)
+    implementation(libs.lifecycle.livedata)
+    implementation(libs.lifecycle.compiler)
+
+    implementation(libs.fragment)
+
+    implementation(libs.preference)
+
+    implementation(libs.room.runtime)
+    annotationProcessor(libs.room.compiler)
+
+    implementation(libs.work.runtime)
+
     // other libs
     implementation(libs.about)
     implementation(libs.crashx)
+    implementation(libs.myket.billing.client)
+    implementation(libs.tapsell.plus)
 
     // test implementation
     testImplementation(libs.junit)

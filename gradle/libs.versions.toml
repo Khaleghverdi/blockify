@@ -31,6 +31,8 @@ junit = "4.13.2"
 espresso_core = "3.4.0"
 
 work_version = "2.8.1"
+myket-billing-client = "1.4"
+tapsell-plus = "2.1.8"
 
 [libraries]
 #gradle plugins
@@ -72,6 +74,8 @@ work-runtime = { module = "androidx.work:work-runtime", version.ref = "work.vers
 crashx = { module = "com.github.TutorialsAndroid:crashx", version.ref = "crashx" }
 zip4j = { module = "net.lingala.zip4j:zip4j", version.ref = "zip4j" }
 about = { module = "com.github.daniel-stoneuk:material-about-library", version.ref = "about" }
+myket-billing-client = { module = "com.github.myketstore:myket-billing-client", version.ref = "myket.billing.client" }
+tapsell-plus = { module = "ir.tapsell.plus:tapsell-plus-sdk-android", version.ref = "tapsell.plus" }
 
 #tests
 junit = { module = "junit:junit", version.ref = "junit" }

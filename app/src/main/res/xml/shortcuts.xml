@@ -1,32 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?><!--
-  ~ Blockify - a messaging app with a focus on speed and security.
-  ~ https://github.com/King-M-A-KH-85/blockify-android
-  ~ Copyright (c) 2023. All Rights Reserved.
-  ~
-  ~ Use of this source code is governed by a BSD-style license
-  ~ that can be found in the LICENSE file in the root of the source
-  ~ tree. An additional intellectual property rights grant can be found
-  ~ in the file PATENTS.  All contributing project authors may
-  ~ be found in the AUTHORS file in the root of the source tree.
-  -->
-
+<?xml version="1.0" encoding="utf-8"?>
 <shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
-<!--    <shortcut-->
-<!--        android:shortcutId="compose"-->
-<!--        android:enabled="true"-->
-<!--        android:icon="@drawable/ic_launcher_foreground"-->
-<!--        android:shortcutShortLabel="@string/compose_shortcut_short_label1"-->
-<!--        android:shortcutLongLabel="@string/compose_shortcut_long_label1"-->
-<!--        android:shortcutDisabledMessage="@string/compose_disabled_message1">-->
-<!--        <intent-->
-<!--            android:action="android.intent.action.VIEW"-->
-<!--            android:targetPackage="com.example.myapplication"-->
-<!--            android:targetClass="com.example.myapplication.ComposeActivity" />-->
-<!--        &lt;!&ndash; If your shortcut is associated with multiple intents, include them-->
-<!--             here. The last intent in the list determines what the user sees when-->
-<!--             they launch this shortcut. &ndash;&gt;-->
-<!--        <categories android:name="android.shortcut.conversation" />-->
-<!--        <capability-binding android:key="actions.intent.CREATE_MESSAGE" />-->
-<!--    </shortcut>-->
-    <!-- Specify more shortcuts here. -->
+    <share-target android:targetClass="org.telegram.ui.LaunchActivity">
+        <data android:mimeType="*/*" />
+        <category android:name="io.blockify.SHORTCUT_SHARE" />
+    </share-target>
 </shortcuts>
